@@ -23,14 +23,14 @@ public class drive extends SubsystemBase {
   private RelativeEncoder rightEncoder;
 
   public drive() {
-    frontRight = new CANSparkMax(1, MotorType.kBrushed);
-    frontLeft = new CANSparkMax(2, MotorType.kBrushed);
-    backRight = new CANSparkMax(3, MotorType.kBrushed);
-    backLeft = new CANSparkMax(4, MotorType.kBrushed);
+    frontRight = new CANSparkMax(1, MotorType.kBrushless);
+    frontLeft = new CANSparkMax(2, MotorType.kBrushless);
+    // backRight = new CANSparkMax(3, MotorType.kBrushless);
+    // backLeft = new CANSparkMax(4, MotorType.kBrushless);
     leftEncoder = frontLeft.getEncoder();
     rightEncoder = frontRight.getEncoder();
-    backLeft.follow(frontLeft);
-    backRight.follow(frontRight);
+    // backLeft.follow(frontLeft);
+    // backRight.follow(frontRight);
     diffDrive = new DifferentialDrive(frontLeft, frontRight);
   }
   public void setDriveSpeed(double speed, double angle) {

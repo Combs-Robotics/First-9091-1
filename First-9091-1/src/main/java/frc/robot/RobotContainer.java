@@ -10,6 +10,7 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.drive;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -30,8 +31,8 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
-
-    m_driveSubsystem.setDriveSpeed(m_driverController.getLeftY(), m_driverController.getRightX());
+    m_driveSubsystem.setDefaultCommand(new RunCommand(() ->
+    m_driveSubsystem.setDriveSpeed(m_driverController.getLeftY(), m_driverController.getRightX()), m_driveSubsystem));
     configureBindings();
 
 

@@ -19,18 +19,17 @@ public class drive extends SubsystemBase {
   private CANSparkMax backLeft; 
   private DifferentialDrive diffDrive;
 
-  private RelativeEncoder leftEncoder;
-  private RelativeEncoder rightEncoder;
 
   public drive() {
-    frontRight = new CANSparkMax(1, MotorType.kBrushless);
-    frontLeft = new CANSparkMax(2, MotorType.kBrushless);
-    backRight = new CANSparkMax(3, MotorType.kBrushless);
-    backLeft = new CANSparkMax(4, MotorType.kBrushless);
-    leftEncoder = frontLeft.getEncoder();
-    rightEncoder = frontRight.getEncoder();
+    frontRight = new CANSparkMax(5, MotorType.kBrushed);
+    frontLeft = new CANSparkMax(2, MotorType.kBrushed);
+    backRight = new CANSparkMax(4, MotorType.kBrushed);
+    backLeft = new CANSparkMax(3, MotorType.kBrushed);
+    // leftEncoder = frontLeft.getEncoder();
+    // rightEncoder = frontRight.getEncoder();
     backLeft.follow(frontLeft);
     backRight.follow(frontRight);
+    frontRight.setInverted(true);
     diffDrive = new DifferentialDrive(frontLeft, frontRight);
   }
   public void setDriveSpeed(double speed, double angle) {
@@ -44,16 +43,16 @@ public class drive extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public double getPos(int returntype) {
-    double lpos = leftEncoder.getPosition();
-    double rpos = rightEncoder.getPosition();
-    //index 0 returns left, 1 returns right, 2 returns the average between them
-    double[] allPos = new double[] {lpos, rpos, (lpos + rpos) / 2};
-    return allPos[returntype];
-  }
+  // public double getPos(int returntype) {
+  //   double lpos = leftEncoder.getPosition();
+  //   double rpos = rightEncoder.getPosition();
+  //   //index 0 returns left, 1 returns right, 2 returns the average between them
+  //   double[] allPos = new double[] {lpos, rpos, (lpos + rpos) / 2};
+  //   return allPos[returntype];
+  // }
 
-  public void resetPos() {
-    leftEncoder.setPosition(0);
-    rightEncoder.setPosition(0);
-  }
+  // public void resetPos() {
+  //   leftEncoder.setPosition(0);
+  //   rightEncoder.setPosition(0);
+  // }
 }
